@@ -116,7 +116,7 @@ class SupervisedData:
             self.train_test_split(0.2)
 
         kf = KFold(n_splits=k, shuffle=shuffle, random_state=random_state)
-        self.k_fold_splits = kf.split(self.training_x)
+        self.k_fold_splits = list(kf.split(self.training_x))
 
     # Data reduction
     def pca_reduce(self, number_of_components):
