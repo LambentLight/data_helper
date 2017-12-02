@@ -169,6 +169,8 @@ class SupervisedData:
             principal_component_1 = class_principal_components[:, 1]
             plt.scatter(principal_component_0, principal_component_1, s=1, label=self.class_labels[c])
 
+        plt.legend()
+
         if to_file:
             if filename is None:
                 print("Error: No filename provided for saved graph.")
@@ -189,6 +191,8 @@ class SupervisedData:
             class_principal_components = principal_components[indices]
             principal_component_0 = class_principal_components[:, 0]
             plt.scatter(principal_component_0, [c] * len(principal_component_0), s=1, label=self.class_labels[c])
+
+        plt.legend()
 
         if to_file:
             if filename is None:
