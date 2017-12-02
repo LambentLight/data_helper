@@ -108,8 +108,8 @@ class SupervisedData:
 
         scaler = StandardScaler()
         scaler.fit(self.training_x)
-        scaler.transform(self.training_x)
-        scaler.transform(self.testing_x)
+        self.training_x = scaler.transform(self.training_x)
+        self.testing_x = scaler.transform(self.testing_x)
 
     def k_fold(self, k, shuffle=False, random_state=None):
         """
