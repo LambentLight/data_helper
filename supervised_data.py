@@ -155,11 +155,10 @@ class SupervisedData:
         return principal_components
 
     # Graphing
-    def pca_graph(self):
+    def pca_graph(self, to_file=False, filename=None):
         """
         Plot the data in two dimensions by reducing using principal component analysis
         """
-        # TODO: add legend
 
         principal_components = self.pca_reduce(2)
 
@@ -168,29 +167,46 @@ class SupervisedData:
             class_principal_components = principal_components[indices]
             principal_component_0 = class_principal_components[:, 0]
             principal_component_1 = class_principal_components[:, 1]
-            plt.scatter(principal_component_0, principal_component_1, s=1)
+            plt.scatter(principal_component_0, principal_component_1, s=1, label=self.class_labels[c])
 
-        plt.show()
+        if to_file:
+            if filename is None:
+                print("Error: No filename provided for saved graph.")
+                exit(1)
+            plt.savefig(filename)
+        else:
+            plt.show()
 
-    def lda_graph(self):
+    def lda_graph(self, to_file=False, filename=None):
         """
         Plot the data in two dimensions by reducing using principal component analysis
         """
-
-        # TODO: add legend
 
         principal_components = self.lda_reduce(1)
         for c in range(self.number_of_classes):
             indices = np.where(self.y == c)[0]  # get all indices for this class
             class_principal_components = principal_components[indices]
             principal_component_0 = class_principal_components[:, 0]
-            plt.scatter(principal_component_0, [c] * len(principal_component_0), s=1)
+            plt.scatter(principal_component_0, [c] * len(principal_component_0), s=1, label=self.class_labels[c])
 
-        plt.show()
+        if to_file:
+            if filename is None:
+                print("Error: No filename provided for saved graph.")
+                exit(1)
+            plt.savefig(filename)
+        else:
+            plt.show()
 
-    def boxplot(self):
+    def boxplot(self, to_file=False, filename=None):
         """
         Plot the data as a boxplot with no outlier points
         """
         plt.boxplot(self.x, 0, '')
-        plt.show()
+
+        if to_file:
+            if filename is None:
+                print("Error: No filename provided for saved graph.")
+                exit(1)
+            plt.savefig(filename)
+        else:
+            plt.show()
