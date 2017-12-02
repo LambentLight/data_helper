@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split, KFold
 from sklearn.decomposition import PCA
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.preprocessing import StandardScaler
 from abc import abstractmethod
 
 
@@ -93,6 +94,22 @@ class SupervisedData:
         """
         self.training_x, self.testing_x, self.training_y, self.testing_y = \
             train_test_split(self.x, self.y, test_size=test_size, shuffle=shuffle, random_state=random_state)
+
+    def standardize(self):
+        """
+        standardizes the training and testing data based on the parameters of the training data.
+        """
+
+        if self.training_x is None or self.testing_x is None:
+            print("Warning: 20% of the data has be held aside for testing in "
+                  "self.testing_x, self.testing_y by default.\n"
+                  "If you would like a custom amount, use self.train_test_split() first.")
+            self.train_test_split(0.2)
+
+        scaler = StandardScaler()
+        scaler.fit(self.training_x)
+        scaler.transform(self.training_x)
+        scaler.transform(self.testing_x)
 
     def k_fold(self, k, shuffle=False, random_state=None):
         """
