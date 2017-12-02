@@ -174,6 +174,7 @@ class SupervisedData:
                 print("Error: No filename provided for saved graph.")
                 exit(1)
             plt.savefig(filename)
+            plt.close()
         else:
             plt.show()
 
@@ -194,6 +195,7 @@ class SupervisedData:
                 print("Error: No filename provided for saved graph.")
                 exit(1)
             plt.savefig(filename)
+            plt.close()
         else:
             plt.show()
 
@@ -208,5 +210,6 @@ class SupervisedData:
                 print("Error: No filename provided for saved graph.")
                 exit(1)
             plt.savefig(filename)
+            plt.close()
         else:
             plt.show()
